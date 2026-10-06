@@ -194,35 +194,6 @@
     transform: scale(1.04);
   }
 
-  .project__caption {
-    padding: var(--space-4) var(--space-4) var(--space-6);
-  }
-
-  .project__title {
-    position: relative;
-    display: inline-block;
-    font-size: var(--text-base);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    text-wrap: balance;
-  }
-
-  .project__title::after {
-    content: "";
-    position: absolute;
-    inset-inline: 0;
-    inset-block-end: -0.25rem;
-    block-size: var(--line-width);
-    background: var(--ink);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--duration) var(--ease);
-  }
-
-  .project:hover .project__title::after {
-    transform: scaleX(1);
-  }
-
   @keyframes project-reveal {
     from {
       opacity: 0;
@@ -240,8 +211,7 @@
       animation: none;
     }
 
-    .project__media img,
-    .project__title::after {
+    .project__media img {
       transition: none;
     }
 

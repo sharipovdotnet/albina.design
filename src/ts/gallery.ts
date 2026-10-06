@@ -13,7 +13,7 @@ function createCard(project: Project, index: number): HTMLElement {
   card.id = project.slug;
   card.style.setProperty('--index', String(index));
 
-  card.append(createMedia(project, index), createCaption(project));
+  card.append(createMedia(project, index));
 
   return card;
 }
@@ -38,17 +38,4 @@ function createMedia(project: Project, index: number): HTMLElement {
   media.append(image);
 
   return media;
-}
-
-function createCaption(project: Project): HTMLElement {
-  const caption = document.createElement('div');
-  caption.className = 'project__caption';
-
-  const title = document.createElement('h2');
-  title.className = 'project__title';
-  title.textContent = project.title;
-
-  caption.append(title);
-
-  return caption;
 }
