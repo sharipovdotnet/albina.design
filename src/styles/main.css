@@ -52,6 +52,7 @@
     /* Боковые отступы main: ровно 300px на экранах от ~1364px, ниже — пропорционально меньше. */
     --main-gutter: 300px;
     --line-width: 1px;
+    --cell-gap: 5px;
 
     --duration: 240ms;
     --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -139,15 +140,14 @@
 
 @layer components {
   /*
-   * Решётка: верхняя и левая линии приходят от контейнера, правая и нижняя —
-   * от каждой ячейки. Соседние прямоугольники делят одну линию, поэтому сетка
-   * читается как единая connected-конструкция, а не как отдельные карточки.
+   * Ячейки разделены отступом, поэтому общую линию они не делят: рамку в 1px несёт
+   * каждая ячейка, а контейнер своих линий не рисует — иначе линия встала бы криво,
+   * упираясь в один край зазора.
    */
   .gallery {
     display: grid;
     grid-template-columns: 1fr;
-    border-block-start: var(--line-width) solid var(--line);
-    border-inline-start: var(--line-width) solid var(--line);
+    gap: var(--cell-gap);
   }
 
   @media (min-width: 40rem) {
@@ -171,8 +171,7 @@
   .project {
     display: flex;
     flex-direction: column;
-    border-inline-end: var(--line-width) solid var(--line);
-    border-block-end: var(--line-width) solid var(--line);
+    border: var(--line-width) solid var(--line);
     animation: project-reveal var(--duration) var(--ease) both;
     animation-delay: calc(var(--index, 0) * 50ms);
   }
