@@ -9,27 +9,61 @@ const REVEALED_CLASS = 'is-revealed';
 export function renderGallery(root: HTMLElement, projects: readonly Project[]): void {
   root.replaceChildren(...projects.map(createCard));
   root.addEventListener('click', toggleReveal);
+  root.addEventListener('pointerout', dropRevealOnMouseLeave);
 }
 
 /**
- * Тап по ячейке возвращает ей цвет: на тач-устройстве hover недоступен, а стили :hover
- * там ещё и «залипают» после касания. Клик приходит и с Enter/Space, так что галерея
- * остаётся управляемой с клавиатуры.
+ * Тап или клик по ячейке возвращает ей цвет; повторный — убирает. Клик приходит и
+ * с Enter/Space, так что галерея управляема с клавиатуры.
  */
 function toggleReveal(event: MouseEvent): void {
-  const target = event.target;
-
-  if (!(target instanceof Element)) {
-    return;
-  }
-
-  const card = target.closest('.project');
+  const card = findCard(event.target);
 
   if (card === null) {
     return;
   }
 
-  const revealed = card.classList.toggle(REVEALED_CLASS);
+  setRevealed(card, !card.classList.contains(REVEALED_CLASS));
+}
+
+/**
+ * Мышь ушла с ячейки — снимаем раскраску, даже если по ячейке щёлкали: цвет по клику
+ * не залипает, его даёт наведение. События тача сюда не попадают — у них другой
+ * pointerType, иначе цвет слетал бы сразу после касания.
+ */
+function dropRevealOnMouseLeave(event: PointerEvent): void {
+  if (event.pointerType !== 'mouse') {
+    return;
+  }
+
+  const card = findCard(event.target);
+
+  if (card === null) {
+    return;
+  }
+
+  const next = event.relatedTarget;
+
+  // Переход внутри ячейки (например, с картинки на её контейнер) уходом не считаем.
+  if (next instanceof Node && card.contains(next)) {
+    return;
+  }
+
+  setRevealed(card, false);
+}
+
+function findCard(target: EventTarget | null): HTMLElement | null {
+  if (!(target instanceof Element)) {
+    return null;
+  }
+
+  const card = target.closest('.project');
+
+  return card instanceof HTMLElement ? card : null;
+}
+
+function setRevealed(card: HTMLElement, revealed: boolean): void {
+  card.classList.toggle(REVEALED_CLASS, revealed);
   card.setAttribute('aria-pressed', String(revealed));
 }
 
