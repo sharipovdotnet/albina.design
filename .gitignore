@@ -1,6 +1,9 @@
 # dependencies
 node_modules/
 
+# npm cache (kept inside the project so sandboxed installs work)
+.npm-cache/
+
 # build output
 dist/
 build/
