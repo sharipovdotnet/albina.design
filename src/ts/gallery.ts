@@ -1,7 +1,7 @@
 import type { Project } from './data/projects';
 
 /** Сколько первых карточек грузить сразу: первый ряд виден без прокрутки. */
-const EAGER_COUNT = 3;
+const EAGER_COUNT = 4;
 
 export function renderGallery(root: HTMLElement, projects: readonly Project[]): void {
   root.replaceChildren(...projects.map(createCard));
@@ -29,10 +29,9 @@ function createMedia(project: Project, index: number): HTMLElement {
   const image = document.createElement('img');
   image.src = project.cover;
   image.alt = `Интерьер: ${project.title}`;
-  // Обложки по конвенции 3:4 (см. public/images/projects/README.md), поэтому атрибуты
-  // размеров совпадают с aspect-ratio ячейки и разметка не «прыгает» при загрузке.
-  image.width = 1200;
-  image.height = 1600;
+  // Размеры обложек разные (от 591×886 до 2275×1728), поэтому фиксированные width/height
+  // были бы враньём. Место под снимок резервирует aspect-ratio у .project__media, так что
+  // сдвига при загрузке нет и без этих атрибутов.
   image.loading = index < EAGER_COUNT ? 'eager' : 'lazy';
   image.decoding = 'async';
   media.append(image);
