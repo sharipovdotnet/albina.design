@@ -186,11 +186,27 @@
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
-    transition: transform 400ms var(--ease);
+    transition:
+      transform 400ms var(--ease),
+      filter 400ms var(--ease);
   }
 
   .project:hover .project__media img {
     transform: scale(1.04);
+  }
+
+  /*
+   * Монохром включаем только там, где есть настоящий курсор. На тач-устройстве наведения
+   * нет, поэтому галерея осталась бы серой навсегда — увидеть цвет было бы нельзя никак.
+   */
+  @media (hover: hover) and (pointer: fine) {
+    .project__media img {
+      filter: grayscale(1);
+    }
+
+    .project:hover .project__media img {
+      filter: grayscale(0);
+    }
   }
 
   @keyframes project-reveal {
