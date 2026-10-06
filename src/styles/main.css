@@ -1,6 +1,6 @@
-/* Golos Text самохостится через Fontsource: woff2 лежат в сборке, внешних запросов нет. */
-@import "@fontsource/golos-text/400.css";
-@import "@fontsource/golos-text/500.css";
+/* Montserrat самохостится через Fontsource: woff2 лежат в сборке, внешних запросов нет. */
+@import "@fontsource/montserrat/400.css";
+@import "@fontsource/montserrat/500.css";
 
 @layer reset, tokens, base, layout, components;
 
@@ -38,7 +38,7 @@
     --line: #e3e0da;
     --media-empty: #f1efeb;
 
-    --font-sans: "Golos Text", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-sans: "Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
 
     --text-xs: clamp(0.8125rem, 0.79rem + 0.11vw, 0.875rem);
     --text-base: clamp(0.9375rem, 0.9rem + 0.19vw, 1.0625rem);
