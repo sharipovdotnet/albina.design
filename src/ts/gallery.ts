@@ -29,10 +29,10 @@ function createMedia(project: Project, index: number): HTMLElement {
   const image = document.createElement('img');
   image.src = project.cover;
   image.alt = `Интерьер: ${project.title}`;
-  // Обложки по конвенции 4:3 (см. public/images/projects/README.md), поэтому атрибуты
+  // Обложки по конвенции 3:4 (см. public/images/projects/README.md), поэтому атрибуты
   // размеров совпадают с aspect-ratio ячейки и разметка не «прыгает» при загрузке.
-  image.width = 1600;
-  image.height = 1200;
+  image.width = 1200;
+  image.height = 1600;
   image.loading = index < EAGER_COUNT ? 'eager' : 'lazy';
   image.decoding = 'async';
   media.append(image);
@@ -48,11 +48,7 @@ function createCaption(project: Project): HTMLElement {
   title.className = 'project__title';
   title.textContent = project.title;
 
-  const meta = document.createElement('p');
-  meta.className = 'project__meta';
-  meta.textContent = project.meta;
-
-  caption.append(title, meta);
+  caption.append(title);
 
   return caption;
 }

@@ -2,8 +2,6 @@ export interface Project {
   /** Идентификатор: якорь карточки и имя папки с фотографиями. */
   readonly slug: string;
   readonly title: string;
-  /** Строка под названием: год и площадь. */
-  readonly meta: string;
   /**
    * Путь к обложке от корня сайта, например
    * `/images/projects/kvartira-v-novostroyke/cover.jpg`.
@@ -13,40 +11,16 @@ export interface Project {
 }
 
 export const projects: readonly Project[] = [
-  {
-    slug: 'kvartira-v-novostroyke',
-    title: 'Квартира в новостройке',
-    meta: '2025 · 78 м²',
-    cover: null,
-  },
-  {
-    slug: 'zagorodnyy-dom',
-    title: 'Загородный дом',
-    meta: '2024 · 210 м²',
-    cover: null,
-  },
-  {
-    slug: 'penthaus-s-terrasoy',
-    title: 'Пентхаус с террасой',
-    meta: '2024 · 140 м²',
-    cover: null,
-  },
-  {
-    slug: 'studiya-dlya-hudozhnika',
-    title: 'Студия для художника',
-    meta: '2023 · 46 м²',
-    cover: null,
-  },
-  {
-    slug: 'kvartira-dlya-semi',
-    title: 'Квартира для семьи',
-    meta: '2023 · 96 м²',
-    cover: null,
-  },
-  {
-    slug: 'dom-u-ozera',
-    title: 'Дом у озера',
-    meta: '2022 · 260 м²',
-    cover: null,
-  },
+  { slug: 'kvartira-v-novostroyke', title: 'Квартира в новостройке', cover: null },
+  { slug: 'zagorodnyy-dom', title: 'Загородный дом', cover: null },
+  { slug: 'penthaus-s-terrasoy', title: 'Пентхаус с террасой', cover: null },
+  { slug: 'studiya-dlya-hudozhnika', title: 'Студия для художника', cover: null },
+  { slug: 'kvartira-dlya-semi', title: 'Квартира для семьи', cover: null },
+  { slug: 'dom-u-ozera', title: 'Дом у озера', cover: null },
+  { slug: 'kvartira-v-starom-fonde', title: 'Квартира в старом фонде', cover: null },
+  { slug: 'townhaus-v-sosnovom-boru', title: 'Таунхаус в сосновом бору', cover: null },
+  { slug: 'kuhnya-gostinaya', title: 'Кухня-гостиная', cover: null },
+  { slug: 'kvartira-dlya-dvoih', title: 'Квартира для двоих', cover: null },
+  { slug: 'dacha-dlya-vyhodnyh', title: 'Дача для выходных', cover: null },
+  { slug: 'mansarda-s-panoramnymi-oknami', title: 'Мансарда с панорамными окнами', cover: null },
 ];
