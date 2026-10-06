@@ -13,7 +13,7 @@ export function renderGallery(root: HTMLElement, projects: readonly Project[]): 
 }
 
 /**
- * Тап или клик по ячейке возвращает ей цвет; повторный — убирает. Клик приходит и
+ * Тап или клик по ячейке возвращает ей цвет, повторный — убирает. Клик приходит и
  * с Enter/Space, так что галерея управляема с клавиатуры.
  */
 function toggleReveal(event: MouseEvent): void {
@@ -23,7 +23,34 @@ function toggleReveal(event: MouseEvent): void {
     return;
   }
 
-  setRevealed(card, !card.classList.contains(REVEALED_CLASS));
+  if (card.classList.contains(REVEALED_CLASS)) {
+    setRevealed(card, false);
+
+    return;
+  }
+
+  revealOnly(card);
+}
+
+/**
+ * Раскрытой остаётся только одна ячейка: на тач-устройстве нет ухода курсора, поэтому
+ * без этого цвет копился бы в каждой тронутой ячейке. На десктопе поведение то же —
+ * предыдущая ячейка и так гаснет, когда мышь уходит.
+ */
+function revealOnly(card: HTMLElement): void {
+  const gallery = card.parentElement;
+
+  if (gallery === null) {
+    return;
+  }
+
+  for (const other of gallery.querySelectorAll<HTMLElement>('.project.is-revealed')) {
+    if (other !== card) {
+      setRevealed(other, false);
+    }
+  }
+
+  setRevealed(card, true);
 }
 
 /**
