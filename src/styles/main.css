@@ -196,7 +196,14 @@
   .project {
     display: flex;
     flex-direction: column;
+    padding: 0;
     border: var(--line-width) solid var(--line);
+    background: none;
+    color: inherit;
+    font: inherit;
+    text-align: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
     animation: project-reveal var(--duration) var(--ease) both;
     animation-delay: calc(var(--index, 0) * 50ms);
   }
@@ -211,6 +218,7 @@
     inline-size: 100%;
     block-size: 100%;
     object-fit: cover;
+    filter: grayscale(1);
     transition:
       transform 400ms var(--ease),
       filter 400ms var(--ease);
@@ -221,14 +229,18 @@
   }
 
   /*
-   * Монохром включаем только там, где есть настоящий курсор. На тач-устройстве наведения
-   * нет, поэтому галерея осталась бы серой навсегда — увидеть цвет было бы нельзя никак.
+   * Цвет возвращается двумя путями: наведением мыши и классом is-revealed, который
+   * вешает тап или Enter (см. gallery.ts). Монохром при этом включён везде, включая
+   * тач-устройства, где hover недоступен.
+   *
+   * Стили :hover спрятаны под (hover: hover) намеренно: на тач-экране они «залипают»
+   * на последней коснувшейся ячейке, и повторный тап уже не смог бы вернуть ч/б.
    */
-  @media (hover: hover) and (pointer: fine) {
-    .project__media img {
-      filter: grayscale(1);
-    }
+  .project.is-revealed .project__media img {
+    filter: grayscale(0);
+  }
 
+  @media (hover: hover) {
     .project:hover .project__media img {
       filter: grayscale(0);
     }

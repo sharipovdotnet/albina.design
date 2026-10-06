@@ -3,14 +3,42 @@ import type { Project } from './data/projects';
 /** Сколько первых карточек грузить сразу: первый ряд виден без прокрутки. */
 const EAGER_COUNT = 4;
 
+/** Класс, включающий цвет в ячейке. */
+const REVEALED_CLASS = 'is-revealed';
+
 export function renderGallery(root: HTMLElement, projects: readonly Project[]): void {
   root.replaceChildren(...projects.map(createCard));
+  root.addEventListener('click', toggleReveal);
+}
+
+/**
+ * Тап по ячейке возвращает ей цвет: на тач-устройстве hover недоступен, а стили :hover
+ * там ещё и «залипают» после касания. Клик приходит и с Enter/Space, так что галерея
+ * остаётся управляемой с клавиатуры.
+ */
+function toggleReveal(event: MouseEvent): void {
+  const target = event.target;
+
+  if (!(target instanceof Element)) {
+    return;
+  }
+
+  const card = target.closest('.project');
+
+  if (card === null) {
+    return;
+  }
+
+  const revealed = card.classList.toggle(REVEALED_CLASS);
+  card.setAttribute('aria-pressed', String(revealed));
 }
 
 function createCard(project: Project, index: number): HTMLElement {
-  const card = document.createElement('article');
+  const card = document.createElement('button');
+  card.type = 'button';
   card.className = 'project';
   card.id = project.slug;
+  card.setAttribute('aria-pressed', 'false');
   card.style.setProperty('--index', String(index));
 
   card.append(createMedia(project, index));
