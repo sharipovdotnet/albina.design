@@ -8,6 +8,9 @@ node_modules/
 dist/
 build/
 
+# preview screenshots and the headless Chrome profile
+.preview/
+
 # logs
 *.log
 npm-debug.log*
