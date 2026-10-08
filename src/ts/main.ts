@@ -1,10 +1,10 @@
 import { projects } from './data/projects';
+import { requireElement } from './dom';
 import { renderGallery } from './gallery';
+import { initIntro } from './intro';
 
-const gallery = document.querySelector<HTMLElement>('#gallery');
+initIntro();
 
-if (gallery === null) {
-  throw new Error('Не найден контейнер галереи #gallery');
-}
+const gallery = requireElement<HTMLElement>('#gallery');
 
 renderGallery(gallery, projects);
