@@ -17,14 +17,19 @@ npm run preview    # просмотр собранной версии
 ## Карта файлов
 
 ```
-index.html                 разметка: шапка, main#main, подвал, оверлей .intro
-src/styles/main.css        вся вёрстка: @layer reset, tokens, base, layout, components
-src/ts/main.ts             точка входа: initIntro() + renderGallery()
+index.html                 разметка: шапка, main#main, подвал, оверлей .intro, окно #lightbox
+src/styles/main.css        вся вёрстка: @layer reset, tokens, base, layout, components, utilities
+src/ts/main.ts             точка входа: initIntro() + initLightbox() + renderGallery()
 src/ts/intro.ts            приветственный экран: 10 с, Esc, inert под оверлеем
-src/ts/gallery.ts          карточки-<button> галереи и раскраска по наведению/тапу
+src/ts/gallery.ts          карточки-<button> галереи; клик по ячейке открывает окно
+src/ts/lightbox.ts         окно галереи на весь экран: кадры, описание, стрелки, Esc
 src/ts/dom.ts              requireElement() — единственный способ достать узел разметки
-src/ts/data/projects.ts    данные 12 проектов: slug, title, cover
-public/images/projects/    обложки проектов; требования к файлу — в README внутри папки
+src/ts/data/projects.ts    данные 10 проектов: slug, title, cover, photos, description
+tools/prepare-photos.ps1   подготовка исходников проекта: обложка 3:4, кадры серии, вес
+public/favicon.ico         монограмма «A» для вкладки: кадры 16/32/48 в одном файле
+public/favicon-16.png      та же монограмма отдельными PNG — их предпочитают браузеры
+public/favicon-32.png
+public/images/projects/    обложки и серии кадров; требования — в README внутри папки
 ```
 
 ## Поиск по репозиторию
@@ -44,6 +49,9 @@ public/images/projects/    обложки проектов; требования
   собственный запуск браузера с `--remote-debugging-port=9222`.
 - Приветственный экран держится 10 секунд: чтобы снять галерею, нужен больший
   `--virtual-time-budget` или подключение по CDP.
+- `tools/prepare-photos.ps1` запускается и в Windows PowerShell 5.1, а он читает `.ps1`
+  без BOM как ANSI: файл должен оставаться в UTF-8 **с BOM**, иначе кириллица в нём
+  превращается в мусор и скрипт падает на разборе. После правки файла проверь BOM.
 
 ## Конвенции
 
@@ -57,5 +65,4 @@ public/images/projects/    обложки проектов; требования
 
 ## Что сейчас заглушки
 
-Favicon, контакты в подвале, `href="#"` у ссылки Telegram в шапке и текст приветствия —
-подробности и TODO в README.
+Контакты в подвале, текст приветствия и описания проектов — подробности и TODO в README.

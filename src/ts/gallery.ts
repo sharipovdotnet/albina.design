@@ -1,82 +1,38 @@
 import type { Project } from './data/projects';
+import type { OpenProject } from './lightbox';
 
 /** Сколько первых карточек грузить сразу: первый ряд виден без прокрутки. */
 const EAGER_COUNT = 4;
 
-/** Класс, включающий цвет в ячейке. */
-const REVEALED_CLASS = 'is-revealed';
-
-export function renderGallery(root: HTMLElement, projects: readonly Project[]): void {
+/**
+ * Рисует сетку проектов и открывает окно галереи по клику. Обработчик клика —
+ * колбэк `openProject`, поэтому галерея ничего не знает про окно и его разметку.
+ */
+export function renderGallery(
+  root: HTMLElement,
+  projects: readonly Project[],
+  openProject: OpenProject,
+): void {
   root.replaceChildren(...projects.map(createCard));
-  root.addEventListener('click', toggleReveal);
-  root.addEventListener('pointerout', dropRevealOnMouseLeave);
-}
 
-/**
- * Тап или клик по ячейке возвращает ей цвет, повторный — убирает. Клик приходит и
- * с Enter/Space, так что галерея управляема с клавиатуры.
- */
-function toggleReveal(event: MouseEvent): void {
-  const card = findCard(event.target);
+  // Карточки несут id по слагу проекта: по нему клик и находит свои данные.
+  const bySlug = new Map(projects.map((project) => [project.slug, project] as const));
 
-  if (card === null) {
-    return;
-  }
+  // Слушатель один на всю сетку: карточек двенадцать, и обработчик на каждой —
+  // та же работа, только двенадцать раз.
+  root.addEventListener('click', (event) => {
+    const card = findCard(event.target);
 
-  if (card.classList.contains(REVEALED_CLASS)) {
-    setRevealed(card, false);
-
-    return;
-  }
-
-  revealOnly(card);
-}
-
-/**
- * Раскрытой остаётся только одна ячейка: на тач-устройстве нет ухода курсора, поэтому
- * без этого цвет копился бы в каждой тронутой ячейке. На десктопе поведение то же —
- * предыдущая ячейка и так гаснет, когда мышь уходит.
- */
-function revealOnly(card: HTMLElement): void {
-  const gallery = card.parentElement;
-
-  if (gallery === null) {
-    return;
-  }
-
-  for (const other of gallery.querySelectorAll<HTMLElement>('.project.is-revealed')) {
-    if (other !== card) {
-      setRevealed(other, false);
+    if (card === null) {
+      return;
     }
-  }
 
-  setRevealed(card, true);
-}
+    const project = bySlug.get(card.id);
 
-/**
- * Мышь ушла с ячейки — снимаем раскраску, даже если по ячейке щёлкали: цвет по клику
- * не залипает, его даёт наведение. События тача сюда не попадают — у них другой
- * pointerType, иначе цвет слетал бы сразу после касания.
- */
-function dropRevealOnMouseLeave(event: PointerEvent): void {
-  if (event.pointerType !== 'mouse') {
-    return;
-  }
-
-  const card = findCard(event.target);
-
-  if (card === null) {
-    return;
-  }
-
-  const next = event.relatedTarget;
-
-  // Переход внутри ячейки (например, с картинки на её контейнер) уходом не считаем.
-  if (next instanceof Node && card.contains(next)) {
-    return;
-  }
-
-  setRevealed(card, false);
+    if (project !== undefined) {
+      openProject(project);
+    }
+  });
 }
 
 function findCard(target: EventTarget | null): HTMLElement | null {
@@ -89,17 +45,13 @@ function findCard(target: EventTarget | null): HTMLElement | null {
   return card instanceof HTMLElement ? card : null;
 }
 
-function setRevealed(card: HTMLElement, revealed: boolean): void {
-  card.classList.toggle(REVEALED_CLASS, revealed);
-  card.setAttribute('aria-pressed', String(revealed));
-}
-
 function createCard(project: Project, index: number): HTMLElement {
   const card = document.createElement('button');
   card.type = 'button';
   card.className = 'project';
   card.id = project.slug;
-  card.setAttribute('aria-pressed', 'false');
+  // Кнопка открывает окно, а не переключает состояние: поэтому haspopup, а не pressed.
+  card.setAttribute('aria-haspopup', 'dialog');
   card.style.setProperty('--index', String(index));
 
   card.append(createMedia(project, index));

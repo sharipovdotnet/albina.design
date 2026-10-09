@@ -1,99 +1,171 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Albina Design — дизайн интерьеров</title>
-    <meta
-      name="description"
-      content="Портфолио дизайнера интерьеров: реализованные проекты квартир и домов."
-    />
-    <meta name="theme-color" content="#ffffff" />
-    <link rel="stylesheet" href="/src/styles/main.css" />
-    <!--
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Albina Design — дизайн интерьеров</title>
+  <meta name="description" content="Портфолио дизайнера интерьеров: реализованные проекты квартир и домов." />
+  <meta name="theme-color" content="#ffffff" />
+  <!--
+      Монограмма «A» шрифтом сайта. PNG идут первыми: браузер выбирает их, а .ico
+      остаётся фолбэком для тех, кто приходит за файлом по соглашению /favicon.ico.
+      Шрифт в иконку не встроить, поэтому буква отрисована заранее.
+    -->
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+  <!--
       Без JS приветственный экран закрыть нечем, а контент под ним был бы недоступен.
       Поэтому в этом случае экран просто не показывается: сайт остаётся читаемым.
     -->
-    <noscript>
-      <style>
-        .intro {
-          display: none;
-        }
-      </style>
-    </noscript>
-  </head>
-  <body>
-    <!--
+  <noscript>
+    <style>
+      .intro {
+        display: none;
+      }
+    </style>
+  </noscript>
+</head>
+
+<body>
+  <!--
       Пока открыт приветственный экран, этот блок помечен inert (см. intro.ts):
       Tab и клики под оверлей не уходят.
     -->
-    <div class="page" id="page">
-      <a class="skip-link" href="#main">Перейти к содержанию</a>
+  <div class="page" id="page">
+    <a class="skip-link" href="#main">Перейти к содержанию</a>
 
-      <header class="site-header">
+    <header class="site-header">
+      <div class="site-header__brand">
         <h1 class="site-header__name">Albina Design</h1>
-        <div class="site-header__contacts">
-          <p class="site-header__note">Дизайн интерьеров</p>
-          <!-- TODO: заменить href на ссылку Telegram, когда будет известен юзернейм -->
-          <a class="site-header__link" href="#" aria-label="Telegram">
-            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path
-                fill="currentColor"
-                d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"
-              />
-            </svg>
-          </a>
-        </div>
-      </header>
+        <p class="site-header__note">Дизайн интерьеров</p>
+      </div>
+      <div class="site-header__contacts">
+        <!-- t.me открывает чат в приложении Telegram, на десктопе — в веб-версии -->
+        <a
+          class="site-header__link"
+          href="https://t.me/albina_designer72"
+          target="_blank"
+          rel="noopener"
+          aria-label="Написать в Telegram — @albina_designer72"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path fill="currentColor"
+              d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z" />
+          </svg>
+        </a>
+        <!-- tel: открывает звонилку на телефоне; на десктопе браузер предложит приложение -->
+        <a class="site-header__phone" href="tel:+79504812345">+7 950 481-23-45</a>
+      </div>
+    </header>
 
-      <main id="main" tabindex="-1">
-        <div class="gallery" id="gallery"></div>
-      </main>
+    <main id="main" tabindex="-1">
+      <div class="gallery" id="gallery"></div>
+    </main>
 
-      <footer class="site-footer">
-        <!-- TODO: добавить реальные контакты — почту, телефон, мессенджер -->
-        <p>© 2026 Albina Design</p>
-      </footer>
-    </div>
+    <footer class="site-footer">
+      <!-- TODO: добавить реальные контакты — почту, телефон, мессенджер -->
+      <p>© 2026 Albina Design</p>
+      <!-- t.me открывает чат в приложении Telegram, на десктопе — в веб-версии -->
+      <p>
+        Разработал
+        <a class="site-footer__link" href="https://t.me/sharipov_r_r" target="_blank" rel="noopener">@sharipov_r_r</a>
+      </p>
+    </footer>
+  </div>
 
-    <!--
+  <!--
       Приветственный экран идёт последним: он перекрывает страницу фиксированным слоем,
       а заголовки остаются по порядку — h1 в шапке, h2 здесь.
     -->
-    <section
-      class="intro"
-      id="intro"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="intro-title"
-      tabindex="-1"
-    >
-      <div class="intro__card">
-        <figure class="intro__portrait">
-          <img
-            src="/images/albina.jpg"
-            alt="Альбина, дизайнер интерьеров"
-            width="1200"
-            height="1958"
-            fetchpriority="high"
-          />
-        </figure>
+  <section class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="intro-title" tabindex="-1">
+    <div class="intro__card">
+      <figure class="intro__portrait">
+        <img src="/images/albina.jpg" alt="Альбина, дизайнер интерьеров" width="1200" height="1958"
+          fetchpriority="high" />
+      </figure>
 
-        <div class="intro__text">
-          <p class="intro__eyebrow">Дизайн интерьеров</p>
-          <h2 class="intro__title" id="intro-title">Здравствуйте, меня зовут Альбина</h2>
-          <div class="intro__rule" aria-hidden="true"></div>
-          <!-- TODO: заменить на текст от Альбины — сейчас это приветствие-заготовка -->
-          <p class="intro__body">
-            Я дизайнер интерьеров: превращаю квартиры и дома в пространства, где спокойно и удобно
-            жить. Для меня интерьер начинается не с мебели, а с человека — с его привычек,
-            распорядка и света в окнах. Люблю натуральные материалы, тёплую палитру и детали,
-            которые замечаешь не сразу.
-          </p>
-        </div>
+      <div class="intro__text">
+        <p class="intro__eyebrow">Дизайн интерьеров</p>
+        <h2 class="intro__title" id="intro-title">Здравствуйте, меня зовут Альбина</h2>
+        <div class="intro__rule" aria-hidden="true"></div>
+        <!-- TODO: заменить на текст от Альбины — сейчас это приветствие-заготовка -->
+        <p class="intro__body">
+          Я дизайнер интерьеров: превращаю квартиры и дома в пространства, где спокойно и удобно
+          жить. Для меня интерьер начинается не с мебели, а с человека — с его привычек,
+          распорядка и света в окнах. Люблю натуральные материалы, тёплую палитру и детали,
+          которые замечаешь не сразу.
+        </p>
+        <!--
+            Кнопка стоит внутри диалога, а не на странице: пока экран открыт, #page помечен
+            inert, и снаружи оверлея она была бы недоступна. Закрывает экран — см. intro.ts.
+          -->
+        <button class="intro__cta" type="button">
+          Смотреть проекты
+          <svg class="intro__cta-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4"
+              stroke-linecap="square" />
+          </svg>
+        </button>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <script type="module" src="/src/ts/main.ts"></script>
-  </body>
+  <!--
+      Окно галереи одно на весь сайт: кадры и описание текущего проекта подставляет
+      lightbox.ts при открытии. Нативный <dialog> даёт модальность, inert фона, ловушку
+      фокуса и Esc без собственного кода. Окно занимает экран целиком и залито тем же
+      цветом, что и страница: слева кадр, справа описание — без рамок между колонками.
+    -->
+  <dialog class="lightbox" id="lightbox" aria-labelledby="lightbox-title">
+    <div class="lightbox__stage">
+      <!--
+          Кадр и подпись пустой серии исключают друг друга: что показать, решает lightbox.ts.
+          Атрибуты hidden снимает он же — в правилах вёрстки их поддерживает слой utilities.
+        -->
+      <img class="lightbox__photo" alt="" hidden />
+      <p class="lightbox__note" hidden>Фотографии проекта скоро появятся</p>
+
+      <div class="lightbox__controls" hidden>
+        <button class="lightbox__prev" type="button" aria-label="Предыдущая фотография">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M14 8H2M6.5 3.5 2 8l4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4"
+              stroke-linecap="square" />
+          </svg>
+        </button>
+        <!-- role=status: смену кадра озвучивают, но не перебивая чтение страницы -->
+        <p class="lightbox__counter" role="status"></p>
+        <button class="lightbox__next" type="button" aria-label="Следующая фотография">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M2 8h12M9.5 3.5 14 8l-4.5 4.5" fill="none" stroke="currentColor" stroke-width="1.4"
+              stroke-linecap="square" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="lightbox__panel">
+      <div class="lightbox__head">
+        <h2 class="lightbox__title" id="lightbox-title"></h2>
+        <button class="lightbox__close" type="button" aria-label="Закрыть галерею">
+          <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
+            <path d="M3 3l10 10M13 3 3 13" fill="none" stroke="currentColor" stroke-width="1.4"
+              stroke-linecap="square" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Линия под заголовком — тот же жест, что на приветственном экране. -->
+      <div class="lightbox__rule" aria-hidden="true"></div>
+
+      <!-- Абзацы описания собирает lightbox.ts: своих строк в разметке нет. -->
+      <div class="lightbox__text" id="lightbox-text"></div>
+    </div>
+  </dialog>
+
+  <script type="module" src="/src/ts/main.ts"></script>
+</body>
+
 </html>
