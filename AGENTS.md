@@ -17,6 +17,7 @@ npm run preview    # просмотр собранной версии
 ## Карта файлов
 
 ```
+.github/workflows/deploy.yml  сборка + публикация на GitHub Pages при push в main
 index.html                 разметка: шапка, main#main, подвал, оверлей .intro, окно #lightbox
 src/styles/main.css        вся вёрстка: @layer reset, tokens, base, layout, components, utilities
 src/ts/main.ts             точка входа: initIntro() + initLightbox() + renderGallery()
@@ -29,6 +30,7 @@ tools/prepare-photos.ps1   подготовка исходников проек�
 public/favicon.ico         монограмма «A» для вкладки: кадры 16/32/48 в одном файле
 public/favicon-16.png      та же монограмма отдельными PNG — их предпочитают браузеры
 public/favicon-32.png
+public/CNAME               домен albina.rustamshar.ru для GitHub Pages
 public/images/projects/    обложки и серии кадров; требования — в README внутри папки
 ```
 
