@@ -2,7 +2,7 @@ import type { Project } from './data/projects';
 import type { OpenProject } from './lightbox';
 
 /** Сколько первых карточек грузить сразу: первый ряд виден без прокрутки. */
-const EAGER_COUNT = 4;
+const EAGER_COUNT = 5;
 
 /**
  * Рисует сетку проектов и открывает окно галереи по клику. Обработчик клика —
